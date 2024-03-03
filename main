@@ -19,15 +19,37 @@ void base(){ //基礎
 }
 
 void name_page(){ //名前入力ページ
- 
+  fill(0);
+  textSize(50);
+  text("名前", 200, height/3);
+
+//ここに入力枠を入れる
 }
 
 void attendance_page(){ //出勤・退勤選択ページ
+  fill(0,0,255);
+  rect(30, 50, 100, 50);
+  fill(255);
+  textSize(30);
+  text("出勤", 50, 85);
+ 
+  fill(0,225,0);
+  rect(150,50,100,50);
+  fill(255);
+  textSize(30);
+  text("退勤", 170, 85);
   
+  fill(225,0,0);
+  rect(270,50,150,50);
+  fill(255);
+  textSize(30);
+  text("打刻忘れ", 280, 85);
 }
 
 void memorize_page(){ //完了画面
-  
+  fill(0);
+  textSize(30);
+  text("記録しました", width/2, height/2);
 }
 
 
