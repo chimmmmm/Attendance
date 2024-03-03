@@ -1,0 +1,38 @@
+String scene = "name";
+void setup(){
+  size(500, 500);
+  
+  PFont font = createFont("Meiryo", 50);
+  textFont(font);
+}
+
+void draw(){
+  base();
+  if(scene == "name") name_page();
+  else if(scene == "attendance") attendance_page();
+  else if(scene == "memo") memorize_page();
+  else if (scene == "forget") forget_page();
+}
+
+void base(){ //基礎
+  background(255); 
+}
+
+void name_page(){ //名前入力ページ
+ 
+}
+
+void attendance_page(){ //出勤・退勤選択ページ
+  
+}
+
+void memorize_page(){ //完了画面
+  
+}
+
+
+void forget_page(){ //打刻忘れの申請ページ
+
+//出勤時間・退勤時間を入力
+  
+}
