@@ -1,4 +1,5 @@
 import java.util.Calendar;
+PGraphics check; //2つ目のウィンドウ
 
 String scene = "name";
 void setup(){
@@ -6,6 +7,13 @@ void setup(){
   
   PFont font = createFont("Meiryo", 50);
   textFont(font);
+
+
+//2つ目のウィンドウ
+  check = createGraphics(200,100);
+  check.beginDraw();
+  check.background(255);
+  check.endDraw();
 }
 
 void draw(){
