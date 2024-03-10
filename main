@@ -58,3 +58,19 @@ void forget_page(){ //打刻忘れの申請ページ
 //出勤時間・退勤時間を入力
   
 }
+
+void mouseClicked(){
+  if(scene == "name"){ \\名前入力したら変わる
+  scene = "attendance";
+}else if(scene == "attendance"){
+     if(get(mouseX,mouseY) == color(255,0,0)){ \\出勤ボタンクリック
+        scene = "memo"; 
+     }else if(get(mouseX,mouseY) == color(0,255,0)){ \\退勤ボタンクリック
+       scene = "memo";
+     }else if(get(mouseX,mouseY) == color(0,0,225)){ \\打刻忘れボタンクリック
+       scene = "forget";
+     }
+  }
+}
+
+
