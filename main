@@ -10,7 +10,7 @@ void setup(){
 
 
 //2つ目のウィンドウ
-  check = createGraphics(200,100);
+  check = createGraphics(500,50);
   check.beginDraw();
   check.background(255);
   check.endDraw();
@@ -81,6 +81,13 @@ void mouseClicked(){
   int hour = now.get(Calendar.HOUR_OF_DAY);
   int minute = now.get(Calendar.MINUTE);
   int second =now.get(Calendar.SECOND);
+
+  check.beginDraw();
+  check.background(255);
+  check.fill(0);
+  check.textSize(20);
+  check.text(year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second, 100, 30); //クリックした時刻
+  check.endDraw();
 
   if(scene == "name"){ \\名前入力したら変わる
   scene = "attendance";
