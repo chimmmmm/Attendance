@@ -63,11 +63,11 @@ void mouseClicked(){
   if(scene == "name"){ \\名前入力したら変わる
   scene = "attendance";
 }else if(scene == "attendance"){
-     if(get(mouseX,mouseY) == color(255,0,0)){ \\出勤ボタンクリック
+     if(mouseX >=30 && mouseY >=50 && mouseX <=30+rectX && mouseY<=50 + rectY){ \\出勤ボタンクリック
         scene = "memo"; 
-     }else if(get(mouseX,mouseY) == color(0,255,0)){ \\退勤ボタンクリック
+     }else if(mouseX >=150 && mouseY >=50 && mouseX <=150+rectX && mouseY<=50 + rectY){ \\退勤ボタンクリック
        scene = "memo";
-     }else if(get(mouseX,mouseY) == color(0,0,225)){ \\打刻忘れボタンクリック
+     }else if(mouseX >=270 && mouseY >=50 && mouseX <=270+rectX && mouseY<=50 + rectY){ \\打刻忘れボタンクリック
        scene = "forget";
      }
   }
