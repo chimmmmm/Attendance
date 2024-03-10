@@ -2,6 +2,8 @@ import java.util.Calendar;
 PGraphics check; //2つ目のウィンドウ
 
 String scene = "name";
+boolean inputName = false;//入力中かどうか
+
 void setup(){
   size(500, 500);
   
@@ -22,6 +24,8 @@ void draw(){
   else if(scene == "attendance") attendance_page();
   else if(scene == "memo") memorize_page();
   else if (scene == "forget") forget_page();
+
+image(check,0,0);
 }
 
 void base(){ //基礎
@@ -33,7 +37,17 @@ void name_page(){ //名前入力ページ
   textSize(50);
   text("名前", 200, height/3);
 
-//ここに入力枠を入れる
+//入力枠
+  fill(255);
+  stroke(0);
+  rect(200,height/2 -20,200,40);
+
+//入力内容
+  if(inputName){
+    textSize(20);
+    fill(0);
+    text(name,200,height/2);
+   }
 }
 
 void attendance_page(){ //出勤・退勤選択ページ
@@ -69,6 +83,31 @@ void forget_page(){ //打刻忘れの申請ページ
   
 }
 
+//名前入力
+void mousePressed(){
+  if(scene == "name" && mouseX >= 200 && mouseX <= 400 && mouseY >= height/2 -20 && mouseY <= height/2 +20){
+    inputName =true;
+  }else{
+    inputName = false;
+  }
+}
+
+void keyPressed(){
+  if(inputName){
+    if(inputName && key == ENTER && name.length() > 0){
+      scene = "attendance";
+      inputName = false;
+   } else if (inputName) {
+     if(keyCode == BACKSPACE && name.length()>0){
+       name = name.substring(0,name.length()-1);
+     }else if(keyCode != ENTER){
+      name += key;
+    }
+   }
+  }
+}
+
+//時刻
 void mouseClicked(){
  　int rectX =100;
   int rectY =50;
