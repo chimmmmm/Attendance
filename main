@@ -1,3 +1,5 @@
+import java.util.Calendar;
+
 String scene = "name";
 void setup(){
   size(500, 500);
@@ -63,17 +65,26 @@ void mouseClicked(){
  　int rectX =100;
   int rectY =50;
   
-  int time = millis();
+  Calendar now = Calendar.getInstance();
+  
+  int year = now.get(Calendar.YEAR);
+  int month =now.get(Calendar.MONTH) +1;
+  int day = now.get(Calendar.DAY_OF_MONTH);
+  int hour = now.get(Calendar.HOUR_OF_DAY);
+  int minute = now.get(Calendar.MINUTE);
+  int second =now.get(Calendar.SECOND);
 
   if(scene == "name"){ \\名前入力したら変わる
   scene = "attendance";
 }else if(scene == "attendance"){
      if(mouseX >=30 && mouseY >=50 && mouseX <=30+rectX && mouseY<=50 + rectY){ \\出勤ボタンクリック
         scene = "memo"; 
-        println("出勤時間:"+time);
+        println("出勤時間:" + year +"年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒");
 
      }else if(mouseX >=150 && mouseY >=50 && mouseX <=150+rectX && mouseY<=50 + rectY){ \\退勤ボタンクリック
        scene = "memo";
+        println("退勤時間:" + year +"年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒");
+
      }else if(mouseX >=270 && mouseY >=50 && mouseX <=270+rectX && mouseY<=50 + rectY){ \\打刻忘れボタンクリック
        scene = "forget";
      }
