@@ -66,8 +66,8 @@ void attendance_page(){ //出勤・退勤選択ページ
   fill(225,0,0);
   rect(270,50,150,50);
   fill(255);
-  textSize(30);
-  text("打刻忘れ", 280, 85);
+  textSize(20);
+  text("打刻忘れ", 280, 80);
 }
 
 void memorize_page(){ //完了画面
