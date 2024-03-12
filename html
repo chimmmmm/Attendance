@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance</title>
+</head>
+<body>
+  <!-- Processingスケッチを表示するキャンバス -->
+  <canvas id="canvas"></canvas>
+
+  <!-- ページのロード時にProcessingスケッチを実行 -->
+  <script>
+    // キャンバスの要素を取得
+    var canvas = document.getElementById("canvas");
+    // Processingスケッチをロード
+    var processingInstance = new Processing(canvas, "attendance.pde");
+  </script>
+</body>
+</html>
