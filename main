@@ -2,6 +2,8 @@ import java.util.Calendar;
 PGraphics check; //2つ目のウィンドウ
 
 String scene = "name";
+
+String name = "";
 boolean inputName = false;//入力中かどうか
 
 void setup(){
@@ -9,13 +11,14 @@ void setup(){
   
   PFont font = createFont("Meiryo", 50);
   textFont(font);
-
-
-//2つ目のウィンドウ
+  
+  
+  //2つ目のウィンドウ
   check = createGraphics(500,50);
   check.beginDraw();
   check.background(255);
   check.endDraw();
+  
 }
 
 void draw(){
@@ -24,8 +27,8 @@ void draw(){
   else if(scene == "attendance") attendance_page();
   else if(scene == "memo") memorize_page();
   else if (scene == "forget") forget_page();
-
-image(check,0,0);
+  
+ image(check,0,0);
 }
 
 void base(){ //基礎
@@ -48,9 +51,10 @@ void name_page(){ //名前入力ページ
     fill(0);
     text(name,200,height/2);
    }
-}
+  }
 
 void attendance_page(){ //出勤・退勤選択ページ
+  
   fill(0,0,255);
   rect(30, 50, 100, 50);
   fill(255);
@@ -64,23 +68,32 @@ void attendance_page(){ //出勤・退勤選択ページ
   text("退勤", 170, 85);
   
   fill(225,0,0);
-  rect(270,50,150,50);
+  rect(270,50,100,50);
   fill(255);
   textSize(20);
   text("打刻忘れ", 280, 80);
 }
 
-void memorize_page(){ //完了画面
+void memorize_page(){
   fill(0);
-  textSize(30);
-  text("記録しました", width/2, height/2);
+  text("記録しました", 200, height/2);
+  
 }
 
-// 確定ボタン
+// 確定ボタンの座標とサイズ
 int confirmButtonX = 300;
 int confirmButtonY = 400;
 int confirmButtonWidth = 100;
 int confirmButtonHeight = 30;
+
+// 入力された日時データを保存する変数
+int inputYear = 2024;
+int inputMonth = 1;
+int inputDay = 1;
+int inputHour = 0;
+int inputMinute = 0;
+int inputSecond = 0;
+
 
 void forget_page(){ //打刻忘れの申請ページ
 
@@ -130,6 +143,7 @@ void mousePressed(){
 }
 
 void keyPressed(){
+  
   if(inputName){
     if(inputName && key == ENTER && name.length() > 0){
       scene = "attendance";
@@ -144,12 +158,13 @@ void keyPressed(){
   }
 }
 
-//時刻
+
 void mouseClicked(){
- 　int rectX =100;
+  int rectX =100;
   int rectY =50;
   
-  Calendar now = Calendar.getInstance();
+    Calendar now = Calendar.getInstance();
+  
   
   int year = now.get(Calendar.YEAR);
   int month =now.get(Calendar.MONTH) +1;
@@ -157,29 +172,53 @@ void mouseClicked(){
   int hour = now.get(Calendar.HOUR_OF_DAY);
   int minute = now.get(Calendar.MINUTE);
   int second =now.get(Calendar.SECOND);
-
+  
   check.beginDraw();
-  check.background(255);
-  check.fill(0);
-  check.textSize(20);
-  check.text(year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second, 100, 30); //クリックした時刻
+  check.background(255); // 背景をクリア
+  check.fill(0); // テキストの色を設定
+  check.textSize(20); // テキストのサイズを設定
+  check.text(year + "/" + month + "/" + day + " " + hour + ":" + minute + ":" + second, 100, 30); // テキストを描画
   check.endDraw();
-
-  if(scene == "name"){ \\名前入力したら変わる
+  
+  if(scene == "name" && name.length()>0){
   scene = "attendance";
-}else if(scene == "attendance"){
-     if(mouseX >=30 && mouseY >=50 && mouseX <=30+rectX && mouseY<=50 + rectY){ \\出勤ボタンクリック
-        scene = "memo"; 
-        println("出勤時間:" + year +"年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒");
-
-     }else if(mouseX >=150 && mouseY >=50 && mouseX <=150+rectX && mouseY<=50 + rectY){ \\退勤ボタンクリック
-       scene = "memo";
-        println("退勤時間:" + year +"年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒");
-
-     }else if(mouseX >=270 && mouseY >=50 && mouseX <=270+rectX && mouseY<=50 + rectY){ \\打刻忘れボタンクリック
-       scene = "forget";
+  
+     }else if(scene == "attendance"){
+       
+         if(mouseX >=30 && mouseY >=50 && mouseX <=30+rectX && mouseY<=50 + rectY){ //出勤
+            scene = "memo"; 
+            println("出勤時間:" + year +"年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒");
+            
+         }else if(mouseX >=150 && mouseY >=50 && mouseX <=150+rectX && mouseY<=50 + rectY){ //退勤
+           scene = "memo";
+            println("退勤時間:" + year +"年" + month + "月" + day + "日" + hour + "時" + minute + "分" + second + "秒");
+           
+         }else if(mouseX >=270 && mouseY >=50 && mouseX <=270+rectX && mouseY<=50 + rectY){ //打刻漏れ
+           scene = "forget";
      }
   }
+  
+  
+  //打刻忘れページ
+  if (scene == "forget") {
+    if (mouseX >= confirmButtonX && mouseX <= confirmButtonX + confirmButtonWidth &&
+        mouseY >= confirmButtonY && mouseY <= confirmButtonY + confirmButtonHeight) {
+      // 確定ボタンがクリックされた場合、入力された日時データを保存
+      inputYear = Integer.parseInt(name);
+      inputMonth = Integer.parseInt(name);
+      inputDay = Integer.parseInt(name);
+      inputHour = Integer.parseInt(name);
+      inputMinute = Integer.parseInt(name);
+      inputSecond = Integer.parseInt(name);
+      
+      // データを確認するための出力
+      println("入力された日時データ：");
+      println("年：" + inputYear);
+      println("月：" + inputMonth);
+      println("日：" + inputDay);
+      println("時：" + inputHour);
+      println("分：" + inputMinute);
+      println("秒：" + inputSecond);
+    }
+  }
 }
-
-
